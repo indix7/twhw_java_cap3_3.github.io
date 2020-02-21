@@ -19,12 +19,22 @@ public class MemoryRepository<E> implements Repository<E> {
 
     @Override
     public E get(String id) {
-        return this.map.get(id);
+        if (this.map.containsKey(id)) {
+            return this.map.get(id);
+        } else {
+            System.out.println("id : " + id + " 实体不存在， 无法获取。");
+            return null;
+        }
     }
 
     @Override
     public void delete(String id) {
-        this.map.remove(id);
+        if (this.map.containsKey(id)) {
+            this.map.remove(id);
+        } else {
+            System.out.println("id : " + id + " 删除失败，指定id不存在。");
+        }
+
     }
 
     /**
